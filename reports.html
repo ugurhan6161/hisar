@@ -50,7 +50,13 @@ body {
         <select id="company-selector" onchange="updateMonthlyReport()">
             <option value="">-- Firma Seçin --</option>
         </select>
-
+           <div class="fixed-menu">
+    <a href="order-list.html"><i class="fas fa-list"></i><span>Sipariş Listesi</span></a>
+    <a href="customers.html"><i class="fas fa-users"></i><span>Müşteriler</span></a>
+    <a href="reports.html"><i class="fas fa-chart-line"></i><span>Raporlar</span></a>
+    <a href="settings.html"><i class="fas fa-cog"></i><span>Ayarlar</span></a>
+    <a href="index.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Çıkış</span></a>
+</div>
         <h2>Aylık Sipariş Raporu</h2>
         <table id="monthly-report-table" border="1" style="width: 100%; border-collapse: collapse; margin-top: 20px; display: none;">
             <thead>
@@ -87,13 +93,7 @@ body {
                 </thead>
                 <tbody id="details-body"></tbody>
             </table>
-             <div class="fixed-menu">
-    <a href="order-list.html"><i class="fas fa-list"></i><span>Sipariş Listesi</span></a>
-    <a href="customers.html"><i class="fas fa-users"></i><span>Müşteriler</span></a>
-    <a href="reports.html"><i class="fas fa-chart-line"></i><span>Raporlar</span></a>
-    <a href="settings.html"><i class="fas fa-cog"></i><span>Ayarlar</span></a>
-    <a href="index.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Çıkış</span></a>
-</div>
+  
             <div id="monthly-summary" style="margin-top: 20px;">
                 <strong>Aylık Toplam Fiyat (TL): <span id="total-price"></span></strong><br>
                 <strong>Aylık Toplam Komisyon Bedeli (TL): <span id="commission-fee"></span></strong><br>
