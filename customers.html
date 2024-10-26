@@ -7,61 +7,64 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: no-repeat center center fixed; /* Arka plan resmi buraya yüklenecek */
-            background-size: cover;
-            justify-content: center;
-            align-items: center;
-        }
+       body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: no-repeat center center fixed; /* Arka plan resmi buraya yüklenecek */
+    background-size: cover;
+    display: flex; /* Flexbox kullanımı ile içerikleri ortalamak için */
+    justify-content: center;
+    align-items: center;
+}
 
-       .modal {
-           display: none; /* Gizli başlangıçta */
-           position: fixed; /* Ekranın üzerinde konumlanır */
-           z-index: 1000; /* Diğer öğelerin üzerinde görünür */
-           left: 0;
-           top: 0;
-           width: 100%; /* Tüm ekranı kaplar */
-           height: 100%; /* Tüm ekranı kaplar */
-           overflow: auto; /* Taşan içerik için kaydırma çubuğu */
-           background-color: rgba(0, 0, 0, 0.4); /* Yarı saydam arka plan */
-       }
+.modal {
+    display: none; /* Gizli başlangıçta */
+    position: fixed; /* Ekranın üzerinde konumlanır */
+    z-index: 1000; /* Diğer öğelerin üzerinde görünür */
+    left: 0;
+    top: 0;
+    width: 100%; /* Tüm ekranı kaplar */
+    height: 100%; /* Tüm ekranı kaplar */
+    overflow: auto; /* Taşan içerik için kaydırma çubuğu */
+    background-color: rgba(0, 0, 0, 0.4); /* Yarı saydam arka plan */
+}
 
-       .modal-content {
-           background-color: #fefefe; /* Beyaz arka plan */
-           margin: 15% auto; /* Üstten ve alttan boşluk, ortalamak için */
-           padding: 20px; /* İçerik için boşluk */
-           border: 1px solid #888; /* Kenarlık */
-           width: 400px; /* Genişlik ayarı */
-           max-width: 90%; /* Ekranın %90'ını aşmasın */
-           box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Gölge efekti */
-           border-radius: 8px; /* Kenarları yuvarlat */
-       }
+.modal-content {
+    background-color: #fefefe; /* Beyaz arka plan */
+    margin: 15% auto; /* Üstten ve alttan boşluk, ortalamak için */
+    padding: 20px; /* İçerik için boşluk */
+    border: 1px solid #888; /* Kenarlık */
+    width: 90%; /* Mobil uyum için genişlik ayarı */
+    max-width: 400px; /* Maksimum genişlik ayarı */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Gölge efekti */
+    border-radius: 8px; /* Kenarları yuvarlat */
+}
 
-       .modal-content button {
-           display: inline-block;
-           margin: 10px 0;
-       }
+.modal-content button {
+    display: inline-block;
+    margin: 10px 0;
+    width: 100%; /* Butonları tam genişlikte yapmak için */
+    padding: 10px; /* Buton içi boşluk */
+}
 
-       .modal-content .print-button {
-           display: block;
-           margin: -90;
-       }
+.modal-content .print-button {
+    display: block;
+    margin: 10px 0; /* Düzgün bir boşluk için */
+}
 
-       .modal-content .delete-button {
-           float: right;
-       }   
+.modal-content .delete-button,
+.modal-content .edit-button {
+    display: inline-block; /* Yanyana dizilmesi için */
+    width: 48%; /* Her bir butonun genişliği */
+    margin: 0 1%; /* Butonlar arasında boşluk */
+}
 
-       .modal-content .edit-button {
-           float: right;
-       }   
+.modal-content .submit-button {
+    display: block;
+    margin: 0 auto;
+}
 
-       .modal-content .submit-button {
-           display: block;
-           margin: 0 auto;
-       }
     </style>
 </head>
 <body>
