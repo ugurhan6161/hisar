@@ -61,16 +61,20 @@
             background: no-repeat center center fixed; /* Arka plan resmi buraya yüklenecek */
             background-size: cover;
             display: flex;
+            flex-direction: column; /* Dikey yönlendirme */
             justify-content: center;
             align-items: center;
+            text-align: center; /* Metin ortalama */
         }
-h4 {
-    background-color: #007BFF;
-    color: white;
-    padding: 20px;
-    text-align: center;
-    margin-bottom: 20px;
-}
+
+        h4 {
+            background-color: #007BFF;
+            color: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: 90%; /* Mobil uyum için genişlik ayarı */
+            max-width: 400px; /* Maksimum genişlik ayarı */
+        }
 
         .lock-screen {
             background-color: rgba(255, 255, 255, 0.8); /* Beyaz şeffaf arka plan */
@@ -78,15 +82,21 @@ h4 {
             border-radius: 15px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
             text-align: center;
+            width: 90%; /* Mobil uyum için genişlik ayarı */
+            max-width: 400px; /* Maksimum genişlik ayarı */
         }
+
         .password-display {
             font-size: 36px; /* Yıldızların font boyutu */
             margin-bottom: 20px;
         }
+
         .button-row {
             display: flex;
             justify-content: center;
+            flex-wrap: wrap; /* Butonların taşmasını engelle */
         }
+
         .button {
             width: 80px; /* Buton genişliği */
             height: 80px; /* Buton yüksekliği */
@@ -99,17 +109,37 @@ h4 {
             cursor: pointer;
             transition: background-color 0.3s;
         }
+
         .button:hover {
             background-color: #0056b3;
         }
+
         #error-message {
             color: red;
             margin-top: 20px;
+            font-size: 16px; /* Hata mesajı yazı boyutu */
+        }
+
+        /* Responsive ayarlar */
+        @media (max-width: 600px) {
+            .button {
+                width: 60px; /* Küçük ekranlar için buton genişliği */
+                height: 60px; /* Küçük ekranlar için buton yüksekliği */
+                font-size: 28px; /* Buton üzerindeki rakamların boyutu */
+            }
+
+            .password-display {
+                font-size: 24px; /* Küçük ekranlarda yıldızların font boyutu */
+            }
+
+            h4 {
+                font-size: 20px; /* Başlık yazı boyutu */
+            }
         }
     </style>
 </head>
 <body>
-    <h4>HİSAR TEMİZLİK </h4>
+    <h4>HİSAR TEMİZLİK</h4>
 
     <div class="lock-screen">
         <div id="password-display" class="password-display">****</div>
@@ -135,7 +165,6 @@ h4 {
         </div>
         <div id="error-message"></div>
     </div>
-<h4>HOŞ GELDİNİZ </h4>
-
+    <h4>HOŞ GELDİNİZ</h4>
 </body>
 </html>
