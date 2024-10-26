@@ -141,10 +141,10 @@ th {
 </head>
 <body>
     <h1>Sipariş Listesi</h1>
+        <div id="orders-container" style="width: 100%;">
  <button id="new-order-btn" onclick="openNewOrderModal()" style="margin-bottom: 20px;">Yeni Sipariş</button>
     <button id="refresh-btn" onclick="refreshPage()" style="margin-bottom: 20px;">Yenile</button>
     <input type="text" id="order-search" placeholder="Sipariş arayın..." onkeyup="searchOrders()" style="margin-bottom: 2px;">
-    <div id="orders-container" style="width: 100%;">
     <h2>Yeni Siparişler</h2>
     <table id="new-orders-table" border="1" style="width: 100%; border-collapse: collapse;">
         <thead>
