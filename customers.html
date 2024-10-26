@@ -91,14 +91,6 @@
     <div id="no-customers-message" style="display: none;">Henüz kayıtlı müşteri yok.</div>
 </div>
 
-    <div class="fixed-menu">
-    <a href="order-list.html"><i class="fas fa-list"></i><span>Sipariş Listesi</span></a>
-    <a href="customers.html"><i class="fas fa-users"></i><span>Müşteriler</span></a>
-    <a href="reports.html"><i class="fas fa-chart-line"></i><span>Raporlar</span></a>
-    <a href="settings.html"><i class="fas fa-cog"></i><span>Ayarlar</span></a>
-    <a href="index.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Çıkış</span></a>
-    </div>
-
     <!-- Yeni Müşteri Ekle Modal -->
     <div id="add-customer-modal" class="modal">
         <div class="modal-content">
@@ -182,6 +174,14 @@
             <button type="button" onclick="submitOrder()">Siparişi Kaydet</button>
         </div>
     </div>
+       <div class="fixed-menu">
+    <a href="order-list.html"><i class="fas fa-list"></i><span>Sipariş Listesi</span></a>
+    <a href="customers.html"><i class="fas fa-users"></i><span>Müşteriler</span></a>
+    <a href="reports.html"><i class="fas fa-chart-line"></i><span>Raporlar</span></a>
+    <a href="settings.html"><i class="fas fa-cog"></i><span>Ayarlar</span></a>
+    <a href="index.html" onclick="logout()"><i class="fas fa-sign-out-alt"></i><span>Çıkış</span></a>
+    </div>
+
 
     <script>
         const customersContainer = document.querySelector('#customer-list tbody');
