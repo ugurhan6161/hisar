@@ -9,66 +9,79 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.16.9/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.4.0/jspdf.umd.min.js"></script>
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: no-repeat center center fixed; /* Arka plan resmi buraya yüklenecek */
-            background-size: cover;
-            justify-content: center;
-            align-items: center;
-        }
-
-        /* Modal için stil */
-        .modal {
-            display: none; /* Varsayılan olarak gizli */
-            position: fixed;
-            z-index: 1;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0,0,0,0.4);
-            padding-top: 60px;
-        }
-button {
-    padding: 2px 4px; /* İç boşlukları ayarla */
-    font-size: 12px; /* Yazı boyutunu küçült */
-    border-radius: 10px; /* Kenarları yuvarla */
+     body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: no-repeat center center fixed; /* Arka plan resmi */
+    background-size: cover;
+    display: flex; /* Flexbox ile içerik ortalama */
+    justify-content: center;
+    align-items: center;
 }
 
+.modal {
+    display: none; /* Varsayılan olarak gizli */
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%; /* Tüm ekranı kaplar */
+    height: 100%; /* Tüm ekranı kaplar */
+    overflow: auto; /* Taşan içerik için kaydırma çubuğu */
+    background-color: rgba(0, 0, 0, 0.4);
+    padding-top: 60px; /* Üstten boşluk */
+}
 
-        .modal-content {
-            background-color: #fefefe;
-            margin: 5% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 300px;
-            border-radius: 10px;
-        }
+button {
+    padding: 8px 12px; /* İç boşlukları ayarla */
+    font-size: 14px; /* Yazı boyutunu biraz artır */
+    border-radius: 10px; /* Kenarları yuvarla */
+    background-color: #007BFF; /* Arka plan rengi */
+    color: white; /* Yazı rengi */
+    border: none; /* Kenar boşluğu yok */
+    cursor: pointer; /* İmleç buton üzerindeyken değişir */
+}
 
-        .close {
-            color: #aaa;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-        }
+button:hover {
+    background-color: #0056b3; /* Hover rengi */
+}
 
-        .close:hover,
-        .close:focus {
-            color: black;
-            text-decoration: none;
-            cursor: pointer;
-        }
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto; /* Üstten ve alttan boşluk */
+    padding: 20px; /* İçerik için boşluk */
+    border: 1px solid #888;
+    width: 90%; /* Mobil uyum için genişlik ayarı */
+    max-width: 300px; /* Maksimum genişlik ayarı */
+    border-radius: 10px; /* Kenarları yuvarlat */
+}
 
-        h1 {
-            background-color: #007BFF;
-            color: white;
-            padding: 20px;
-            text-align: center;
-            margin-bottom: 20px;
-        }
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+h1 {
+    background-color: #007BFF;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px; /* Yazı boyutunu artır */
+    width: 90%; /* Mobil uyum için genişlik ayarı */
+    max-width: 400px; /* Maksimum genişlik ayarı */
+}
+
     </style>
 </head>
 <body>
