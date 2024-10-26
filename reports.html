@@ -7,33 +7,39 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
-        body {
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background: no-repeat center center fixed; 
-            background-size: cover;
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.4);
-        }
-        .modal-content {
-            background-color: #fefefe;
-            margin: 15% auto;
-            padding: 20px;
-            border: 1px solid #888;
-            width: 510px;
-            max-width: 90%;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-        }
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    background: no-repeat center center fixed; 
+    background-size: cover;
+    display: flex; /* Flexbox ile içerik ortalama */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal {
+    display: none; /* Gizli başlangıçta */
+    position: fixed; /* Ekranın üzerinde konumlanır */
+    z-index: 1000; /* Diğer öğelerin üzerinde görünür */
+    left: 0;
+    top: 0;
+    width: 100%; /* Tüm ekranı kaplar */
+    height: 100%; /* Tüm ekranı kaplar */
+    overflow: auto; /* Taşan içerik için kaydırma çubuğu */
+    background-color: rgba(0, 0, 0, 0.4); /* Yarı saydam arka plan */
+}
+
+.modal-content {
+    background-color: #fefefe; /* Beyaz arka plan */
+    margin: 15% auto; /* Üstten ve alttan boşluk, ortalamak için */
+    padding: 20px; /* İçerik için boşluk */
+    border: 1px solid #888; /* Kenarlık */
+    width: 90%; /* Mobil uyum için genişlik ayarı */
+    max-width: 510px; /* Maksimum genişlik ayarı */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Gölge efekti */
+    border-radius: 8px; /* Kenarları yuvarlat */
+}
     </style>
 </head>
 <body>
