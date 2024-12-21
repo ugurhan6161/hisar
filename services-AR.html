@@ -1,0 +1,1796 @@
+<html><head><base href="enjoyturk.com">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>الخدمات - EnjoyTurk</title>
+  <style>
+    :root {
+      --primary: #2c3e50;  
+      --secondary: #3498db; 
+      --light: #ecf0f1;    
+      --dark: #1a1a2e;     
+      --accent: #00f2c3;   
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+      background: var(--dark);
+      background-image: 
+        linear-gradient(45deg, rgba(26, 26, 46, 0.97), rgba(26, 26, 46, 0.95)),
+        url('https://images.unsplash.com/photo-1639322537231-2f206d654b26');
+      background-attachment: fixed;
+      background-size: cover;
+      color: var(--light);
+      direction: rtl;
+      text-align: right;
+    }
+
+    .header {
+      background: rgba(44, 62, 80, 0.95);
+      backdrop-filter: blur(10px);
+      color: white;
+      padding: 1rem;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    }
+
+    .logo {
+      font-size: 1.5rem;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      align-items: center;
+      flex-direction: row-reverse;
+    }
+
+    .nav-links a {
+      color: white;
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      text-shadow: 0 0 10px var(--accent);
+    }
+
+    .hero,
+    .hero-slides,
+    .hero-slide,
+    .hero-content,
+    .slide-controls {
+      display: none;
+    }
+
+    .stats-section {
+      background: linear-gradient(135deg, rgba(44, 62, 80, 0.9), rgba(26, 26, 46, 0.95));
+      padding: 4rem 0;
+      margin: 2rem 0;
+      border-top: 1px solid rgba(0, 242, 195, 0.2);
+      border-bottom: 1px solid rgba(0, 242, 195, 0.2);
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .stats-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .stats-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 0 1rem;
+    }
+
+    .stat-card {
+      text-align: center;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(0, 242, 195, 0.2);
+      transition: all 0.3s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+    }
+
+    .stat-number {
+      font-size: 3rem;
+      font-weight: bold;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .stat-title {
+      font-size: 1.2rem;
+      color: var(--light);
+      margin-bottom: 0.5rem;
+    }
+
+    .stat-description {
+      color: var(--light);
+      opacity: 0.8;
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+
+    @keyframes countUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .services-section {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 1rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .services-section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .service-card {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: var(--light);
+      border-radius: 15px;
+      padding: 2rem;
+      text-align: center;
+      transition: transform 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      display: block;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.5s ease-out;
+    }
+
+    .service-card.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px var(--accent);
+      border-color: var(--accent);
+      animation: glow 2s infinite;
+      background: rgba(0, 242, 195, 0.1);
+    }
+
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px var(--accent); }
+      50% { box-shadow: 0 0 20px var(--accent); }
+      100% { box-shadow: 0 0 5px var(--accent); }
+    }
+
+    .service-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 1.5rem;
+      color: var(--accent);
+      opacity: 0.9;
+      transition: all 0.3s ease;
+    }
+
+    .service-content h3 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .service-content p {
+      color: var(--light);
+      line-height: 1.6;
+    }
+
+    .footer {
+      background: var(--dark);
+      color: white;
+      padding: 2rem;
+      margin-top: 2rem;
+      border-top: 1px solid rgba(0, 242, 195, 0.2);
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .footer-section h4 {
+      margin-bottom: 1rem;
+    }
+
+    .social-links {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .social-links a {
+      color: white;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      
+      .hero-content h1 {
+        font-size: 2rem;
+      }
+      
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1rem;
+        padding: 0 0.5rem;
+      }
+
+      .service-card {
+        padding: 1rem;
+        min-height: 200px;
+      }
+
+      .service-card .service-icon {
+        width: 40px;
+        height: 40px;
+        margin: 0 auto 0.75rem;
+      }
+
+      .service-content h3 {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .service-content p {
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .service-card {
+        padding: 0.75rem;
+        min-height: 180px;
+      }
+
+      .service-card .service-icon {
+        width: 32px;
+        height: 32px;
+        margin: 0 auto 0.5rem;
+      }
+
+      .service-content h3 {
+        font-size: 0.8rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .service-content p {
+        font-size: 0.7rem;
+        line-height: 1.3;
+      }
+    }
+    
+    /* Hamburger menu icon */
+    .menu-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      width: 30px;
+      height: 21px;
+      cursor: pointer;
+      z-index: 1000;
+    }
+
+    .menu-toggle span {
+      display: block;
+      height: 3px;
+      width: 100%;
+      background-color: white;
+      transition: all 0.3s ease;
+    }
+
+    /* Mobile responsive styles */
+    @media (max-width: 768px) {
+      .menu-toggle {
+        display: flex;
+      }
+
+      .nav-links {
+        display: flex !important; 
+        position: fixed;
+        top: 0;
+        right: -100%;
+        height: 100vh;
+        width: 80%;
+        max-width: 400px;
+        background: rgba(44, 62, 80, 0.98);
+        backdrop-filter: blur(10px);
+        flex-direction: column;
+        padding: 80px 40px;
+        transition: right 0.3s ease;
+      }
+
+      .nav-links.active {
+        right: 0;
+      }
+
+      .language-switcher {
+        margin: 1rem 0;
+      }
+
+      .hero {
+        margin-top: 60px;
+        height: 40vh;
+      }
+
+      .hero-content h1 {
+        font-size: 1.8rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+        padding: 0 1rem;
+      }
+
+      .services-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+      }
+
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr); /* Show 2 cards per row on mobile */
+        gap: 1rem;
+        padding: 0 0.5rem;
+      }
+
+      .stat-card {
+        padding: 1rem;
+      }
+
+      .stat-number {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .stat-title {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+      }
+
+      .stat-description {
+        font-size: 0.8rem;
+        line-height: 1.4;
+      }
+
+      .stats-section {
+        padding: 2rem 0;
+        margin: 1rem 0;
+      }
+    }
+
+    /* For very small screens */
+    @media (max-width: 480px) {
+      .stats-container {
+        grid-template-columns: repeat(2, 1fr); /* Keep 2 cards per row even on very small screens */
+        gap: 0.5rem;
+      }
+
+      .stat-card {
+        padding: 0.75rem;
+      }
+
+      .stat-number {
+        font-size: 1.75rem;
+      }
+    }
+
+    /* Icon animation styles */
+    .service-card .service-icon {
+      transition: all 0.4s ease;
+      transform-origin: center;
+    }
+
+    .service-card:hover .service-icon {
+      animation: iconAnimation 1.5s ease infinite;
+      color: var(--accent);
+      filter: drop-shadow(0 0 5px var(--accent));
+    }
+
+    @keyframes iconAnimation {
+      0% {
+        transform: scale(1) rotate(0deg);
+      }
+      25% {
+        transform: scale(1.2) rotate(5deg);
+      }
+      50% {
+        transform: scale(1.1) rotate(-5deg);
+      }
+      75% {
+        transform: scale(1.2) rotate(5deg);
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+      }
+    }
+
+    /* Enhance the existing service-card hover effect */
+    .service-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 0 20px var(--accent);
+      border-color: var(--accent);
+      animation: glow 2s infinite;
+      background: rgba(0, 242, 195, 0.1);
+    }
+
+    /* Make icons slightly larger */
+    .service-icon {
+      width: 72px;
+      height: 72px;
+      margin: 0 auto 1.5rem;
+      color: var(--accent);
+      opacity: 0.9;
+      transition: all 0.3s ease;
+    }
+
+    /* Add subtle rotation to icon on initial card hover */
+    .service-card:hover .service-icon {
+      transform: scale(1.1);
+      opacity: 1;
+    }
+    
+    .whatsapp-box {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      z-index: 1000;
+    }
+
+    .whatsapp-button {
+      background: #25D366;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+    }
+
+    .whatsapp-popup {
+      position: absolute;
+      bottom: 80px;
+      left: 0;
+      background: white;
+      border-radius: 10px;
+      width: 300px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+      display: none;
+      transform: translateY(20px);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-popup.show {
+      display: block;
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    .whatsapp-header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+
+    .whatsapp-header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .whatsapp-header-text {
+      flex: 1;
+    }
+
+    .whatsapp-header-text h3 {
+      margin: 0;
+      color: #1a1a1a;
+      font-size: 16px;
+    }
+
+    .whatsapp-header-text p {
+      margin: 0;
+      color: #666;
+      font-size: 12px;
+    }
+
+    .whatsapp-message {
+      background: #DCF8C6;
+      padding: 10px 15px;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      color: #1a1a1a;
+    }
+
+    .whatsapp-input {
+      display: flex;
+      gap: 10px;
+    }
+
+    .whatsapp-input input {
+      flex: 1;
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 20px;
+      outline: none;
+    }
+
+    .whatsapp-input button {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 8px 15px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .whatsapp-input button:hover {
+      background: #128C7E;
+    }
+    
+    .language-switcher {
+      display: flex;
+      align-items: center;
+      margin-right: 2rem;
+      margin-left: 0;
+      position: relative;
+    }
+
+    .current-lang {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      color: white;
+      cursor: pointer;
+      font-size: 0.9rem;
+    }
+
+    .lang-options {
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background: rgba(44, 62, 80, 0.95);
+      backdrop-filter: blur(10px);
+      border-radius: 8px;
+      padding: 0.5rem;
+      display: none;
+      min-width: 120px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    .lang-options.show {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    .lang-option {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem;
+      color: white;
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+
+    .lang-option:hover {
+      background: rgba(255,255,255,0.1);
+      color: var(--accent);
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    
+    /* Animation for hamburger menu */
+    .menu-toggle.active span:nth-child(1) {
+      transform: translateY(9px) rotate(45deg);
+    }
+
+    .menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .menu-toggle.active span:nth-child(3) {
+      transform: translateY(-9px) rotate(-45deg);
+    }
+    
+    html {
+      scroll-behavior: smooth;
+    }
+    
+    .matrix-transition {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 9999;
+      background: rgba(0, 0, 0, 0.9);
+      display: none;
+      overflow: hidden;
+    }
+
+    .matrix-character {
+      position: absolute;
+      color: #0f0;
+      font-family: 'Courier New', monospace;
+      font-size: 1.2rem;
+      line-height: 1;
+      white-space: nowrap;
+      text-shadow: 0 0 5px #0f0;
+      opacity: 0;
+      animation: matrixFall 2s linear infinite;
+    }
+
+    @keyframes matrixFall {
+      0% {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(100vh);
+        opacity: 0;
+      }
+    }
+    
+    .services-hero {
+      height: 40vh;
+      background: linear-gradient(135deg, rgba(26, 26, 46, 0.9), rgba(44, 62, 80, 0.95)),
+                  url('https://images.unsplash.com/photo-1460925895917-afdab827c52f');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      margin-top: 80px;
+    }
+
+    .service-detail {
+      max-width: 1200px;
+      margin: 2rem auto;
+      padding: 2rem;
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border-radius: 15px;
+      border: 1px solid rgba(0, 242, 195, 0.2);
+      margin-bottom: 2rem;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out;
+    }
+
+    .service-detail.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .service-detail:first-of-type {
+      margin-top: 100px;
+    }
+
+    .service-detail h2 {
+      color: var(--accent);
+      margin-bottom: 1rem;
+    }
+
+    .service-features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 8px;
+      border: 1px solid rgba(0, 242, 195, 0.1);
+      cursor: pointer;
+      transition: all 0.3s ease;
+      flex-direction: row-reverse;
+    }
+
+    .feature-item:hover {
+      background: rgba(0, 242, 195, 0.1);
+      transform: translateY(-2px);
+    }
+
+    .feature-icon {
+      width: 24px;
+      height: 24px;
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .services-header {
+        font-size: 1.5rem;
+        padding: 1rem;
+        margin-top: 60px;
+      }
+
+      .search-container {
+        padding: 0.5rem;
+        margin-bottom: 1rem;
+      }
+
+      .search-box {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+      }
+
+      .service-detail {
+        padding: 1rem;
+        margin: 1rem 0;
+      }
+
+      .service-detail:first-of-type {
+        margin-top: 60px;
+      }
+
+      .service-detail h2 {
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .service-detail p {
+        font-size: 0.9rem;
+        line-height: 1.4;
+      }
+
+      .service-features {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+      }
+
+      .feature-item {
+        padding: 0.75rem;
+        font-size: 0.8rem;
+      }
+
+      .feature-icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      .footer {
+        padding: 1rem;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      .footer-section h4 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section p {
+        font-size: 0.9rem;
+      }
+
+      .whatsapp-button {
+        width: 50px;
+        height: 50px;
+      }
+
+      .whatsapp-button svg {
+        width: 25px;
+        height: 25px;
+      }
+
+      .whatsapp-popup {
+        width: 280px;
+        padding: 15px;
+      }
+
+      .whatsapp-header img {
+        width: 30px;
+        height: 30px;
+      }
+
+      .whatsapp-header-text h3 {
+        font-size: 0.9rem;
+      }
+
+      .whatsapp-header-text p {
+        font-size: 0.8rem;
+      }
+
+      .whatsapp-message {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+      }
+
+      .whatsapp-input input {
+        padding: 6px 10px;
+        font-size: 0.9rem;
+      }
+
+      .whatsapp-input button {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .services-header {
+        font-size: 1.3rem;
+      }
+
+      .service-detail h2 {
+        font-size: 1.1rem;
+      }
+
+      .service-detail p {
+        font-size: 0.85rem;
+      }
+
+      .service-features {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .feature-item {
+        padding: 0.5rem;
+        font-size: 0.75rem;
+      }
+
+      .feature-icon {
+        width: 16px;
+        height: 16px;
+      }
+    }
+    
+    .services-header {
+      text-align: center;
+      padding: 2rem;
+      margin-top: 80px;
+      color: var(--accent);
+    }
+
+    .search-container {
+      max-width: 600px;
+      margin: 0 auto 2rem;
+      padding: 1rem;
+    }
+
+    .search-box {
+      width: 100%;
+      padding: 1rem;
+      font-size: 1.1rem;
+      border: 2px solid var(--accent);
+      border-radius: 25px;
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--light);
+      transition: all 0.3s ease;
+    }
+
+    .search-box:focus {
+      outline: none;
+      box-shadow: 0 0 15px var(--accent);
+      background: rgba(255, 255, 255, 0.15);
+    }
+
+    .search-box::placeholder {
+      color: rgba(255, 255, 255, 0.6);
+      animation: blink 1s step-end infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    @media (max-width: 768px) {
+      .search-container {
+        padding: 1rem;
+      }
+      
+      .search-box {
+        font-size: 1rem;
+        padding: 0.8rem;
+      }
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      z-index: 1000;
+    }
+
+    .modal-content {
+      position: relative;
+      background: var(--dark);
+      margin: 15% auto;
+      padding: 20px;
+      width: 80%;
+      max-width: 500px;
+      border-radius: 15px;
+      border: 1px solid var(--accent);
+      box-shadow: 0 0 20px var(--accent);
+      animation: modalFadeIn 0.3s;
+    }
+
+    @keyframes modalFadeIn {
+      from {opacity: 0; transform: translateY(-20px);}
+      to {opacity: 1; transform: translateY(0);}
+    }
+
+    .close-modal {
+      position: absolute;
+      right: 20px;
+      top: 10px;
+      font-size: 28px;
+      cursor: pointer;
+      color: var(--light);
+    }
+
+    .close-modal:hover {
+      color: var(--accent);
+    }
+
+    @media (max-width: 768px) {
+      .modal-content {
+        width: 95%;
+        margin: 30% auto;
+        padding: 15px;
+      }
+    }
+    
+    .order-button {
+      background: #25D366;
+      color: white;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      width: 100%;
+    }
+
+    .order-button:hover {
+      background: #128C7E;
+      transform: translateY(-2px);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    }
+
+    @media (max-width: 768px) {
+      .order-button {
+        padding: 10px 20px;
+        font-size: 0.9rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <script>
+    function toggleLanguageOptions() {
+      const langOptions = document.querySelector('.lang-options');
+      if (langOptions) {
+        langOptions.classList.toggle('show');
+      }
+    }
+  </script>
+  <header class="header">
+    <nav class="nav">
+      <div class="logo">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2v20M2 12h20"/>
+        </svg>
+        EnjoyTurk
+      </div>
+      <div class="menu-toggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <div class="nav-links">
+        <a href="main-AR.html">الرئيسية</a>
+        <a href="services-AR.html">الخدمات</a>
+        <a href="portfolio-AR.html">المحفظة</a>
+        <a href="contact-AR.html">اتصل بنا</a>
+        
+        <div class="language-switcher">
+          <div class="current-lang" onclick="toggleLanguageOptions()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M2 12h20"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+            </svg>
+            <span>العربية</span>
+          </div>
+          <div class="lang-options">
+            <a href="hizmetler.html" class="lang-option">
+              <span>Türkçe</span>
+            </a>
+            <a href="services.html" class="lang-option">
+              <span>English</span>
+            </a>
+            <a href="services-AR.html" class="lang-option">
+              <span>العربية</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <h1 class="services-header">الخدمات</h1>
+  <div class="search-container">
+    <input type="text" class="search-box" id="serviceSearch" placeholder="ابحث عن الخدمات...">
+  </div>
+
+  <section class="service-detail" id="sosyal-medya">
+    <h2>إدارة وسائل التواصل الاجتماعي</h2>
+    <p>نقوي وجودك على وسائل التواصل الاجتماعي من خلال إنشاء المحتوى الاحترافي وإدارة المجتمع.</p>
+    <div class="service-features">
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5A4 4 0 0 1 17 15H7a4 4 0 0 1-4-3.5 4 4 0 0 1 4-3.5h10a4 4 0 0 1 4 3.5z"/>
+        </svg>
+        <span>إنشاء المحتوى</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <span>إدارة المجتمع</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 7h-9M14 17H5M9 12H4"/>
+        </svg>
+        <span>إدارة الإعلانات</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail" id="web-tasarim">
+    <h2>تصميم المواقع</h2>
+    <p>نصمم مواقع حديثة وسهلة الاستخدام توفر تجربة جيدة للمستخدم.</p>
+    <div class="service-features">
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="2" y="3" width="20" height="14" rx="2" ry="2"/>
+          <line x1="8" y1="21" x2="16" y2="21"/>
+          <line x1="12" y1="17" x2="12" y2="21"/>
+        </svg>
+        <span>تصميم الموقع</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/>
+        </svg>
+        <span>حلول التجارة الإلكترونية</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 7h-9M14 17H5M9 12H4"/>
+        </svg>
+        <span>تطوير التطبيقات الويب</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail" id="dijital-pazarlama">
+    <h2>التسويق الرقمي</h2>
+    <p>نقوم بزيادة وجودك على الإنترنت من خلال خيارات التسويق الرقمي.</p>
+    <div class="service-features">
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5A4 4 0 0 1 17 15H7a4 4 0 0 1-4-3.5 4 4 0 0 1 4-3.5h10a4 4 0 0 1 4 3.5z"/>
+        </svg>
+        <span>تحسين محرك البحث</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <span>إدارة الإعلانات على جوجل</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 7h-9M14 17H5M9 12H4"/>
+        </svg>
+        <span>تسويق المحتوى</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail" id="veri-analizi-ve-toplama">
+    <h2>تحليل البيانات وجمعها</h2>
+    <p>نساعدك على نمو عملك من خلال جمع بيانات العملاء المحتملين وتحليل بيانات جوجل خريطة وتحليل سلوك العملاء.</p>
+    <div class="service-features">
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5A4 4 0 0 1 17 15H7a4 4 0 0 1-4-3.5 4 4 0 0 1 4-3.5h10a4 4 0 0 1 4 3.5z"/>
+        </svg>
+        <span>جمع البيانات</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <span>تحليل البيانات</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 7h-9M14 17H5M9 12H4"/>
+        </svg>
+        <span>تحليل سلوك العملاء</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail" id="yapay-zeka-cozumleri">
+    <h2>حلول الذكاء الاصطناعي</h2>
+    <p>نقوم بautomating خدمة العملاء والعمليات التجارية الخاصة بك من خلال مساعد الذكاء الاصطناعي المخصص لشركةك.</p>
+    <div class="service-features">
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5A4 4 0 0 1 17 15H7a4 4 0 0 1-4-3.5 4 4 0 0 1 4-3.5h10a4 4 0 0 1 4 3.5z"/>
+        </svg>
+        <span>مساعد الذكاء الاصطناعي</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <span>automating العمليات التجارية</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 7h-9M14 17H5M9 12H4"/>
+        </svg>
+        <span>automating خدمة العملاء</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail" id="multimedya-uretimi">
+    <h2>إنتاج الوسائط المتعددة</h2>
+    <p>فيديوهات إعلانية، محتوى وسائل التواصل الاجتماعي، موسيقى إعلانية، وخدمات صوت احترافية.</p>
+    <div class="service-features">
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5A4 4 0 0 1 17 15H7a4 4 0 0 1-4-3.5 4 4 0 0 1 4-3.5h10a4 4 0 0 1 4 3.5z"/>
+        </svg>
+        <span>فيديوهات إعلانية</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <span>محتوى وسائل التواصل الاجتماعي</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 7h-9M14 17H5M9 12H4"/>
+        </svg>
+        <span>موسيقى إعلانية</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail" id="grafik-tasarim">
+    <h2>تصميم جرافيك</h2>
+    <p>تصميم شعار، هوية الشركات، بطاقات العمل، وتصميم البروشور.</p>
+    <div class="service-features">
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5A4 4 0 0 1 17 15H7a4 4 0 0 1-4-3.5 4 4 0 0 1 4-3.5h10a4 4 0 0 1 4 3.5z"/>
+        </svg>
+        <span>تصميم الشعار</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <span>تصميم الهوية</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 7h-9M14 17H5M9 12H4"/>
+        </svg>
+        <span>تصميم البطاقات والبروشور</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail" id="qr-menu">
+    <h2>نظام قائمة QR</h2>
+    <p>تقديم تجربة رقمية لعملائك من خلال تصميم قائمة QR الحديثة ونظام إدارة القائمة.</p>
+    <div class="service-features">
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5A4 4 0 0 1 17 15H7a4 4 0 0 1-4-3.5 4 4 0 0 1 4-3.5h10a4 4 0 0 1 4 3.5z"/>
+        </svg>
+        <span>تصميم قائمة QR</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <span>نظام إدارة القائمة</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 7h-9M14 17H5M9 12H4"/>
+        </svg>
+        <span>تجربة العملاء الرقمية</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail" id="nfc-kartvizit">
+    <h2>بطاقة العمل NFC</h2>
+    <p>بطاقة العمل في العصر الرقمي: مشاركة جميع المعلومات الخاصة بك بمجرد لمس باستخدام تقنية NFC.</p>
+    <div class="service-features">
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5A4 4 0 0 1 17 15H7a4 4 0 0 1-4-3.5 4 4 0 0 1 4-3.5h10a4 4 0 0 1 4 3.5z"/>
+        </svg>
+        <span>تقنية NFC</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <span>بطاقة العمل الرقمية</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 7h-9M14 17H5M9 12H4"/>
+        </svg>
+        <span>مشاركة المعلومات بدون تلامس</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="service-detail" id="dijital-donusum">
+    <h2>التحول الرقمي</h2>
+    <p>إعداد عملك للعصر الرقمي: رقمنة العمليات التجارية وزيادة الكفاءة.</p>
+    <div class="service-features">
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 11.5A4 4 0 0 1 17 15H7a4 4 0 0 1-4-3.5 4 4 0 0 1 4-3.5h10a4 4 0 0 1 4 3.5z"/>
+        </svg>
+        <span>رقمنة العمليات التجارية</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 16v-4M12 8h.01"/>
+        </svg>
+        <span>تحسين الكفاءة</span>
+      </div>
+      <div class="feature-item">
+        <svg class="feature-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20 7h-9M14 17H5M9 12H4"/>
+        </svg>
+        <span>إعداد للعصر الرقمي</span>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="footer-content">
+      <div class="footer-section">
+        <h4>EnjoyTurk</h4>
+        <p>شريكك في الحلول الرقمية</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>اتصل بنا</h4>
+        <p>البريد الإلكتروني: info@enjoyturk.com</p>
+      </div>
+      
+      <div class="footer-section">
+        <h4>وسائل التواصل الاجتماعي</h4>
+        <div class="social-links">
+          <a href="https://instagram.com/enjoy.turk"><svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37zM17.5 6.5h.01"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+  
+  <div class="whatsapp-box">
+    <div class="whatsapp-button" onclick="toggleWhatsAppPopup()">
+      <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
+        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+      </svg>
+    </div>
+    
+    <div class="whatsapp-popup">
+      <div class="whatsapp-header">
+        <img src="https://via.placeholder.com/40" alt="الملف الشخصي">
+        <div class="whatsapp-header-text">
+          <h3>دعم EnjoyTurk</h3>
+          <p>يستجيب عادة في غضون ساعة واحدة</p>
+        </div>
+      </div>
+      <div class="whatsapp-message">
+        مرحباً! كيف يمكننا مساعدتك؟ 
+      </div>
+      <div class="whatsapp-input">
+        <input type="text" placeholder="اكتب رسالتك...">
+        <button onclick="sendWhatsAppMessage()">إرسال</button>
+      </div>
+    </div>
+  </div>
+  
+  <div id="serviceModal" class="modal">
+    <div class="modal-content">
+      <span class="close-modal">&times;</span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDescription"></p>
+      <button class="order-button">إنشاء طلب</button>
+    </div>
+  </div>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', () => {
+          menuToggle.classList.toggle('active');
+          navLinks.classList.toggle('active');
+        });
+
+        document.addEventListener('click', (e) => {
+          if (!e.target.closest('.nav-links') && !e.target.closest('.menu-toggle')) {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+          }
+        });
+
+        navLinks.querySelectorAll('a').forEach(link => {
+          link.addEventListener('click', () => {
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+          });
+        });
+      }
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+          }
+        });
+      }, {
+        threshold: 0.1
+      });
+
+      document.querySelectorAll('.services-section, .stats-section, .hero, .service-card, .service-detail').forEach(element => {
+        observer.observe(element);
+      });
+
+      document.addEventListener('click', (e) => {
+        const langOptions = document.querySelector('.lang-options');
+        if (!e.target.closest('.current-lang') && langOptions) {
+          langOptions.classList.remove('show');
+        }
+      });
+
+      const whatsappButton = document.querySelector('.whatsapp-button');
+      const whatsappPopup = document.querySelector('.whatsapp-popup');
+      
+      if (whatsappButton && whatsappPopup) {
+        whatsappButton.addEventListener('click', () => {
+          whatsappPopup.classList.toggle('show');
+        });
+      }
+      
+      function setupSearch() {
+        const searchBox = document.getElementById('serviceSearch');
+        const serviceDetails = document.querySelectorAll('.service-detail');
+        
+        searchBox.addEventListener('input', function(e) {
+          const searchTerm = e.target.value.toLowerCase();
+          
+          serviceDetails.forEach(service => {
+            const title = service.querySelector('h2').textContent.toLowerCase();
+            const description = service.querySelector('p').textContent.toLowerCase();
+            
+            if (title.includes(searchTerm) || description.includes(searchTerm)) {
+              service.style.display = 'block';
+            } else {
+              service.style.display = 'none';
+            }
+          });
+        });
+      }
+      
+      setupSearch();
+      
+      function setupSearchPlaceholder() {
+        const searchBox = document.getElementById('serviceSearch');
+        const services = [
+          'إدارة وسائل التواصل الاجتماعي',
+          'تصميم المواقع',
+          'التسويق الرقمي',
+          'تحليل البيانات',
+          'حلول الذكاء الاصطناعي', 
+          'إنتاج الوسائط المتعددة',
+          'تصميم جرافيك',
+          'نظام قائمة QR',
+          'بطاقة العمل NFC',
+          'التحول الرقمي'
+        ];
+        
+        let currentIndex = 0;
+        let currentText = '';
+        let letterIndex = 0;
+        let isDeleting = false;
+        let typingSpeed = 100;
+
+        function type() {
+          const currentService = services[currentIndex];
+          
+          if (isDeleting) {
+            currentText = currentService.substring(0, letterIndex - 1);
+            letterIndex--;
+            typingSpeed = 50;
+          } else {
+            currentText = currentService.substring(0, letterIndex + 1);
+            letterIndex++;
+            typingSpeed = 100;
+          }
+
+          searchBox.setAttribute('placeholder', currentText + (isDeleting ? '' : '|'));
+
+          if (!isDeleting && letterIndex === currentService.length) {
+            typingSpeed = 2000; // Pause at the end
+            isDeleting = true;
+          } else if (isDeleting && letterIndex === 0) {
+            isDeleting = false;
+            currentIndex = (currentIndex + 1) % services.length;
+            typingSpeed = 500; // Pause before next word
+          }
+
+          setTimeout(type, typingSpeed);
+        }
+
+        type();
+      }
+
+      setupSearchPlaceholder();
+
+      function createMatrixTransition() {
+        const matrixContainer = document.createElement('div');
+        matrixContainer.className = 'matrix-transition';
+        document.body.appendChild(matrixContainer);
+
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%^&*()';
+        const columns = Math.floor(window.innerWidth / 20);
+
+        for (let i = 0; i < columns; i++) {
+          const character = document.createElement('div');
+          character.className = 'matrix-character';
+          character.style.left = (i * 20) + 'px';
+          character.style.animationDelay = (Math.random() * 2) + 's';
+          
+          setInterval(() => {
+            character.textContent = characters.charAt(Math.floor(Math.random() * characters.length));
+          }, 100);
+
+          matrixContainer.appendChild(character);
+        }
+
+        return matrixContainer;
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        const internalLinks = document.querySelectorAll('a[href^="https://enjoyturk.com"]');
+        
+        internalLinks.forEach(link => {
+          link.addEventListener('click', function(e) {
+            e.preventDefault();
+            const href = this.getAttribute('href');
+            
+            const matrix = createMatrixTransition();
+            matrix.style.display = 'block';
+            
+            setTimeout(() => {
+              window.location.href = href;
+            }, 2000);
+          });
+        });
+      });
+
+      function setupModalSystem() {
+        const modal = document.getElementById('serviceModal');
+        const modalTitle = document.getElementById('modalTitle');
+        const modalDescription = document.getElementById('modalDescription');
+        const closeBtn = document.querySelector('.close-modal');
+        const orderButton = document.querySelector('.order-button');
+        
+        const serviceInfo = {
+          'إنشاء المحتوى': {
+            title: 'إنشاء المحتوى',
+            description: 'نقوم بإنشاء محتوى فريد وجذاب لعلامتك التجارية. نقوي وجودك على وسائل التواصل الاجتماعي بالمحتوى المرئي والفيديو والنص.'
+          },
+          'إدارة المجتمع': {
+            title: 'إدارة المجتمع',
+            description: 'ندير حسابات التواصل الاجتماعي الخاصة بك باحترافية، مما يزيد من التفاعل مع متابعيك ويعزز الوعي بالعلامة التجارية.'
+          },
+          'إدارة الإعلانات': {
+            title: 'إدارة الإعلانات',
+            description: 'نقوم بتطوير استراتيجيات إعلانية مخصصة لجمهورك المستهدف، مما يزيد من النتائج مع استخدامك لكافة الموارد بشكل فعال.'
+          },
+          'تصميم الموقع': {
+            title: 'تصميم الموقع',
+            description: 'نصمم مواقع حديثة وسهلة الاستخدام توفر تجربة جيدة للمستخدم. يظهر موقعك في أعلى نتائج محركات البحث بفضل البنية التحتية الممتازة لتحسين محرك البحث.'
+          },
+          'حلول التجارة الإلكترونية': {
+            title: 'حلول التجارة الإلكترونية',
+            description: 'نبني موقعك الإلكتروني باستخدام أحدث التقنيات. زد مبيعاتك مع أنظمة الدفع الآمنة ولوحة إدارة سهلة الاستخدام.'
+          },
+          'تطوير التطبيقات الويب': {
+            title: 'تطوير التطبيقات الويب',
+            description: 'نقوم بتطوير تطبيقات الويب المخصصة لصناعتك. أوتوماتيكية العمليات التجارية وزيادة الكفاءة.'
+          },
+          'تحسين محرك البحث': {
+            title: 'تحسين محرك البحث',
+            description: 'نجعل موقعك متوافقًا مع محركات البحث، مما يزيد من حركة المرور العضوية.'
+          },
+          'إدارة إعلانات جوجل': {
+            title: 'إدارة إعلانات جوجل',
+            description: 'ندير حملات إعلانات جوجل الخاصة بك باحترافية، مما يزيد من معدلات التحويل.'
+          },
+          'تسويق المحتوى': {
+            title: 'تسويق المحتوى',
+            description: 'نقوم بتحليل استراتيجيات المحتوى المخصصة لعلامتك التجارية، مما يعزز العلاقات القوية مع جمهورك المستهدف.'
+          },
+          'جمع البيانات': {
+            title: 'جمع البيانات',
+            description: 'نقوم بجمع بيانات العملاء الخاصة بك باستخدام طرق احترافية.'
+          },
+          'تحليل البيانات': {
+            title: 'تحليل البيانات',
+            description: 'نقوم بتحليل البيانات المُجمعة لاستخراج أفكار قيمة لصناعتك.'
+          },
+          'تحليل سلوك العملاء': {
+            title: 'تحليل سلوك العملاء',
+            description: 'نقوم بتحليل أنماط سلوك العملاء، مما يؤثر على استراتيجياتك.'
+          },
+          'مساعد الذكاء الاصطناعي': {
+            title: 'مساعد الذكاء الاصطناعي',
+            description: 'نقوم بتطوير مساعد الذكاء الاصطناعي المخصص لشركةك، مما يأتمتيك خدمة العملاء.'
+          },
+          'automating العمليات التجارية': {
+            title: 'automating العمليات التجارية',
+            description: 'نقوم بالتأكيد من أتمتة العمليات التجارية باستخدام الذكاء الاصطناعي، مما يزيد من الكفاءة.'
+          },
+          'automating خدمة العملاء': {
+            title: 'automating خدمة العملاء',
+            description: 'حلولنا القائمة على الذكاء الاصطناعي تعزز رضا العملاء.'
+          },
+          'فيديوهات إعلانية': {
+            title: 'فيديوهات إعلانية',
+            description: 'نقوم بإنتاج فيديوهات إعلانية مؤثرة لعلامتك التجارية، مما يلفت انتباه جمهورك المستهدف.'
+          },
+          'محتوى وسائل التواصل الاجتماعي': {
+            title: 'محتوى وسائل التواصل الاجتماعي',
+            description: 'نقوم بإنتاج فيديوهات ومحتوى مرئي مخصص لمنصات التواصل الاجتماعي.'
+          },
+          'موسيقى إعلانية': {
+            title: 'موسيقى إعلانية',
+            description: 'نقوم بتطوير موسيقى إعلانية وجingles مخصصة لعلامتك التجارية.'
+          },
+          'تصميم الشعار': {
+            title: 'تصميم الشعار',
+            description: 'نقوم بتصميم شعارات احترافية تعبر عن علامتك التجارية بأفضل طريقة.'
+          },
+          'تصميم الهوية': {
+            title: 'تصميم الهوية',
+            description: 'نقوم بإنشاء تصاميم هوية الشركات المتسقة والمحترفة لعلامتك التجارية.'
+          },
+          'تصميم البطاقات والبروشور': {
+            title: 'تصميم البطاقات والبروشور',
+            description: 'نقوم بتصميم مواد مطبوعة تتماشى مع هوية الشركة.'
+          },
+          'نظام قائمة QR': {
+            title: 'نظام قائمة QR',
+            description: 'نقوم بتصميم قائمة QR الحديثة ونظام إدارة القائمة.'
+          },
+          'نظام إدارة القائمة': {
+            title: 'نظام إدارة القائمة',
+            description: 'نقوم بتطوير نظام إدارة قائمة فعال للمطاعم.'
+          },
+          'تجربة العملاء الرقمية': {
+            title: 'تجربة العملاء الرقمية',
+            description: 'نقوم بتعزيز تجربة العملاء من خلال حلول رقمية مبتكرة.'
+          },
+          'تقنية NFC': {
+            title: 'تقنية NFC',
+            description: 'نقوم بتطبيق تقنية NFC لتبادل المعلومات بلمسة واحدة.'
+          },
+          'بطاقة العمل الرقمية': {
+            title: 'بطاقة العمل الرقمية',
+            description: 'نقوم بتصميم بطاقات العمل الرقمية التي تستخدم تقنية NFC.'
+          },
+          'مشاركة المعلومات بدون تلامس': {
+            title: 'مشاركة المعلومات بدون تلامس',
+            description: 'نقوم بسهولة مشاركة المعلومات بدون تلامس باستخدام تقنيات متقدمة.'
+          },
+          'رقمنة العمليات التجارية': {
+            title: 'رقمنة العمليات التجارية',
+            description: 'نقوم برقمنة العمليات التجارية لتحضير عملك للعصر الرقمي.'
+          },
+          'تحسين الكفاءة': {
+            title: 'تحسين الكفاءة',
+            description: 'نقوم بتطبيق حلول لتعزيز الكفاءة التشغيلية.'
+          },
+          'إعداد للعصر الرقمي': {
+            title: 'إعداد للعصر الرقمي',
+            description: 'نقوم بإعداد عملك للعصر الرقمي من خلال حلول مبتكرة.'
+          }
+        };
+
+        // Add click event to all feature items
+        document.querySelectorAll('.feature-item').forEach(item => {
+          item.addEventListener('click', () => {
+            const title = item.querySelector('span').textContent;
+            const info = serviceInfo[title];
+            
+            if (info) {
+              modalTitle.textContent = info.title;
+              modalDescription.textContent = info.description;
+              modal.style.display = 'block';
+              document.body.style.overflow = 'hidden';
+              
+              function createWhatsAppLink(serviceName) {
+                const text = encodeURIComponent(`مرحباً، أود الحصول على معلومات حول خدمة ${serviceName}.`);
+                return `https://wa.me/905550009261?text=${text}`; // Replace with actual phone number
+              }
+              
+              orderButton.textContent = `إنشاء طلب لخدمة ${info.title}`;
+              orderButton.onclick = () => {
+                window.open(createWhatsAppLink(info.title), '_blank');
+              };
+            }
+          });
+        });
+
+        // Close modal functionality
+        closeBtn.addEventListener('click', () => {
+          modal.style.display = 'none';
+          document.body.style.overflow = 'auto';
+        });
+
+        window.addEventListener('click', (e) => {
+          if (e.target === modal) {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+        });
+
+        // Close on escape key
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modal.style.display === 'block') {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+          }
+        });
+      }
+
+      setupModalSystem();
+    });
+  </script>
+</body>
+</html>

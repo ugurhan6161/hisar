@@ -1,0 +1,295 @@
+<html><head><base href="enjoyturk.com">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EnjoyTurk - Welcome</title>
+  <style>
+    :root {
+      --primary: #2c3e50;
+      --secondary: #3498db;
+      --light: #ecf0f1;
+      --dark: #1a1a2e;
+      --accent: #00f2c3;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    .intro-container {
+      position: fixed;
+      width: 100%;
+      height: 100vh;
+      background: var(--dark);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+    }
+
+    .background-slides {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 1;
+    }
+
+    .bg-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease;
+      background-size: cover;
+      background-position: center;
+      filter: brightness(0.3);
+    }
+
+    .bg-slide.active {
+      opacity: 1;
+    }
+
+    .content-box {
+      position: relative;
+      z-index: 2;
+      background: rgba(26, 26, 46, 0.8);
+      backdrop-filter: blur(10px);
+      padding: 3rem;
+      border-radius: 20px;
+      border: 1px solid rgba(0, 242, 195, 0.2);
+      text-align: center;
+      max-width: 600px;
+      width: 90%;
+      animation: glowBorder 2s infinite;
+    }
+
+    @keyframes glowBorder {
+      0% { border-color: rgba(0, 242, 195, 0.2); }
+      50% { border-color: rgba(0, 242, 195, 0.8); }
+      100% { border-color: rgba(0, 242, 195, 0.2); }
+    }
+
+    .logo {
+      margin-bottom: 2rem;
+    }
+
+    .logo svg {
+      width: 80px;
+      height: 80px;
+      fill: var(--accent);
+      animation: rotateLogo 10s linear infinite;
+    }
+
+    @keyframes rotateLogo {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .welcome-text {
+      color: var(--light);
+      margin-bottom: 2rem;
+    }
+
+    .welcome-text h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      background: linear-gradient(45deg, #fff, var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .welcome-text p {
+      opacity: 0.8;
+      line-height: 1.6;
+    }
+
+    .language-selection {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .lang-button {
+      background: rgba(0, 242, 195, 0.1);
+      border: 1px solid var(--accent);
+      color: var(--light);
+      padding: 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .lang-button:hover {
+      background: var(--accent);
+      color: var(--dark);
+      transform: translateY(-3px);
+      box-shadow: 0 0 20px rgba(0, 242, 195, 0.4);
+    }
+
+    .lang-button img {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+    }
+
+    @media (max-width: 768px) {
+      .content-box {
+        padding: 1.5rem;
+        width: 95%;
+        margin: 10px;
+      }
+
+      .welcome-text h1 {
+        font-size: 1.8rem;
+      }
+
+      .welcome-text p {
+        font-size: 0.9rem;
+      }
+
+      .language-selection {
+        grid-template-columns: 1fr;
+        gap: 0.8rem;
+      }
+
+      .lang-button {
+        padding: 0.8rem;
+        font-size: 0.9rem;
+      }
+
+      .logo svg {
+        width: 60px;
+        height: 60px;
+      }
+
+      .lang-button img {
+        width: 20px;
+        height: 20px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .content-box {
+        padding: 1rem;
+      }
+
+      .welcome-text h1 {
+        font-size: 1.5rem;
+      }
+
+      .welcome-text p {
+        font-size: 0.8rem;
+      }
+
+      .logo svg {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    @keyframes glitch {
+      0% { transform: translate(0); }
+      20% { transform: translate(-2px, 2px); }
+      40% { transform: translate(2px, -2px); }
+      60% { transform: translate(-2px, -2px); }
+      80% { transform: translate(2px, 2px); }
+      100% { transform: translate(0); }
+    }
+
+    .glitch-effect {
+      animation: glitch 0.3s infinite;
+      animation-timing-function: step-end;
+    }
+  </style>
+</head>
+<body>
+  <div class="intro-container">
+    <div class="background-slides">
+      <div class="bg-slide active" style="background-image: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80')"></div>
+      <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1518770660439-4636190af475?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80')"></div>
+      <div class="bg-slide" style="background-image: url('https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-1.2.1&auto=format&fit=crop&w=1920&q=80')"></div>
+    </div>
+
+    <div class="content-box">
+      <div class="logo">
+        <svg viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"/>
+          <path d="M12 2v20M2 12h20"/>
+        </svg>
+      </div>
+      
+      <div class="welcome-text">
+        <h1>EnjoyTurk</h1>
+        <p>Dijital dünyada markanızı büyütmek için doğru adrestesiniz.</p>
+        <p>Choose your language / Dilinizi seçin / اختر لغتك</p>
+      </div>
+
+      <div class="language-selection">
+        <a href="anasayfa.html" class="lang-button">
+          <img src="https://flagicons.lipis.dev/flags/4x3/tr.svg" alt="Türkçe">
+          Türkçe
+        </a>
+        <a href="main.html" class="lang-button">
+          <img src="https://flagicons.lipis.dev/flags/4x3/gb.svg" alt="English">
+          English
+        </a>
+        <a href="main-AR.html" class="lang-button">
+          <img src="https://flagicons.lipis.dev/flags/4x3/sa.svg" alt="العربية">
+          العربية
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Background slideshow
+    const slides = document.querySelectorAll('.bg-slide');
+    let currentSlide = 0;
+
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+
+    setInterval(nextSlide, 5000);
+
+    // Add glitch effect on hover
+    document.querySelectorAll('.lang-button').forEach(button => {
+      button.addEventListener('mouseenter', () => {
+        button.classList.add('glitch-effect');
+      });
+      
+      button.addEventListener('mouseleave', () => {
+        button.classList.remove('glitch-effect');
+      });
+    });
+
+    // Page transition when clicking language buttons
+    document.querySelectorAll('.lang-button').forEach(button => {
+      button.addEventListener('click', (e) => {
+        e.preventDefault();
+        const href = button.getAttribute('href');
+        
+        document.querySelector('.content-box').style.animation = 'glitch 0.3s infinite';
+        
+        setTimeout(() => {
+          window.location.href = href;
+        }, 1000);
+      });
+    });
+  </script>
+</body>
+</html>
