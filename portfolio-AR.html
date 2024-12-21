@@ -26,7 +26,6 @@
       background-attachment: fixed;
       background-size: cover;
       color: var(--light);
-      direction: rtl; /* Add right-to-left support */
     }
 
     .header {
@@ -47,7 +46,6 @@
       display: flex;
       align-items: center;
       gap: 0.5rem;
-      flex-direction: row-reverse; /* Change logo direction */
     }
 
     .nav {
@@ -62,7 +60,6 @@
       display: flex;
       gap: 2rem;
       align-items: center;
-      flex-direction: row-reverse; /* Change nav links direction */
     }
 
     .nav-links a {
@@ -817,7 +814,6 @@
       transition: all 0.3s ease;
       opacity: 0;
       transform: translateY(20px);
-      transition: all 0.6s ease-out;
     }
 
     .portfolio-item.visible {
@@ -869,8 +865,6 @@
       border-radius: 15px;
       font-size: 0.8rem;
       border: 1px solid var(--accent);
-      margin-left: 0; /* Adjust margin for right-to-left */
-      margin-right: 5px; /* Adjust margin for right-to-left */
     }
 
     .portfolio-thumb {
@@ -915,7 +909,6 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 1rem;
-      flex-direction: row-reverse; /* Change filter buttons direction */
     }
 
     .filter-button {
@@ -983,14 +976,6 @@
       margin: 4rem auto;
       padding: 2rem;
       text-align: center;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease-out;
-    }
-
-    .references.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .references h2 {
@@ -1230,21 +1215,9 @@
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
-    
-    .matrix-transition.active {
-      display: block;
-      animation: matrixFadeOut 2s forwards;
-    }
-
-    @keyframes matrixFadeOut {
-      0% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { opacity: 0; display: none; }
-    }
   </style>
 </head>
 <body>
-  <div class="matrix-transition"></div>
   <header class="header">
     <nav class="nav">
       <div class="logo">
@@ -1275,7 +1248,7 @@
             <span>AR</span>
           </div>
           <div class="lang-options">
-            <a href="portfolyo.html" class="lang-option">
+            <a href="portfolyo-TR.html" class="lang-option">
               <span>Türkçe</span>
             </a>
             <a href="portfolio.html" class="lang-option">
@@ -1344,16 +1317,19 @@
     <h2>عملاؤنا</h2>
     <div class="references-grid">
       <div class="reference-item">
+        <img src="https://picsum.photos/200/200?random=1" alt="Hisar Temizlik">
         <h3>Hisar Temizlik</h3>
         <p>"قاموا بعمل رائع!"</p>
         <a href="https://www.hisartemizliktrabzon.com" class="reference-link" target="_blank">مشاهدة الموقع</a>
       </div>
       <div class="reference-item">
+        <img src="https://picsum.photos/200/200?random=2" alt="Duygu Nail Art">
         <h3>Duygu Nail Art</h3>
         <p>"فريق محترف جداً"</p>
         <a href="https://duygu.netlify.app" class="reference-link" target="_blank">مشاهدة الموقع</a>
       </div>
       <div class="reference-item">
+        <img src="https://picsum.photos/200/200?random=3" alt="Airbagcim">
         <h3>Airbagcim</h3>
         <p>"جاء تماماً كما أردنا"</p>
         <a href="https://www.airbagcim.com" class="reference-link" target="_blank">مشاهدة الموقع</a>
@@ -1371,7 +1347,6 @@
       <div class="footer-section">
         <h4>اتصل بنا</h4>
         <p>البريد الإلكتروني: info@enjoyturk.com</p>
-        <p>هاتف: +90 (462) XXX XX XX</p>
       </div>
       
       <div class="footer-section">
@@ -1379,7 +1354,7 @@
       </div>
     </div>
   </footer>
-  
+    <div class="matrix-transition"></div>
   <div class="whatsapp-box">
     <div class="whatsapp-button" onclick="window.toggleWhatsAppPopup()">
       <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
@@ -1389,6 +1364,7 @@
     
     <div class="whatsapp-popup">
       <div class="whatsapp-header">
+        <img src="https://via.placeholder.com/40" alt="Profile">
         <div class="whatsapp-header-text">
           <h3>دعم EnjoyTurk</h3>
           <p>عادة ما يرد خلال ساعة واحدة</p>
@@ -1399,48 +1375,22 @@
       </div>
       <div class="whatsapp-input">
         <input type="text" placeholder="اكتب رسالتك...">
-        <button onclick="window.sendWhatsAppMessage()">إرسال</button>
+        <button onclick="sendWhatsAppMessage()">إرسال</button>
       </div>
     </div>
   </div>
   
   <script>document.addEventListener('DOMContentLoaded', function () {
-  function startMatrixTransition() {
-    const transition = document.querySelector('.matrix-transition');
-    transition.classList.add('active');
-  
-    // Create matrix characters
-    for(let i = 0; i < 100; i++) {
-      const character = document.createElement('div');
-      character.className = 'matrix-character';
-      character.style.left = `${Math.random() * 100}%`;
-      character.style.animationDelay = `${Math.random() * 2}s`;
-      character.textContent = String.fromCharCode(0x30A0 + Math.random() * 96);
-      transition.appendChild(character);
-    }
-
-    // Clean up after transition
-    setTimeout(() => {
-      transition.classList.remove('active');
-      transition.innerHTML = ''; // Remove matrix characters
-    }, 2000);
-  }
-
-  window.toggleWhatsAppPopup = function () {
-    const popup = document.querySelector('.whatsapp-popup');
-    popup.classList.toggle('show');
-  };
-  window.sendWhatsAppMessage = function () {
-    const input = document.querySelector('.whatsapp-input input');
-    const message = encodeURIComponent(input.value);
-    if (message) {
-      const whatsappNumber = '905550009261';
-      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
-      input.value = '';
-      toggleWhatsAppPopup();
-    }
-  };
-  let currentSlide = 0;
+  const matrixTransition = initMatrixTransition();
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', async e => {
+      e.preventDefault();
+      const href = link.getAttribute('href');
+      await matrixTransition.show();
+      window.location.href = href;
+    });
+  });
+ let currentSlide = 0;
   const slides = document.querySelectorAll('.slide');
   const slideContainer = document.querySelector('.slider-container');
   function updateSlider() {
@@ -1458,6 +1408,7 @@
     currentSlide = (currentSlide + 1) % slides.length;
     updateSlider();
   }, 5000);
+  const references = document.querySelectorAll('.reference-item');
   const observerOptions = {
     threshold: 0.5,
     rootMargin: '0px'
@@ -1467,36 +1418,13 @@
       if (entry.isIntersecting) {
         entry.target.style.opacity = '1';
         entry.target.style.transform = 'translateX(0)';
-        const link = entry.target.querySelector('.reference-link');
-        if (link) {
-          link.style.transition = 'all 0.3s ease';
-        }
       }
     });
   }, observerOptions);
-  const scrollObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        scrollObserver.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-  const references = document.querySelectorAll('.reference-item');
   references.forEach(reference => {
     referenceObserver.observe(reference);
   });
-  document.querySelectorAll('.portfolio-item').forEach(item => {
-    scrollObserver.observe(item);
-  });
-  const servicesSection = document.querySelector('.services-section');
-  if (servicesSection) {
-    scrollObserver.observe(servicesSection);
-  }
-  const referencesSection = document.querySelector('.references');
-  if (referencesSection) {
-    scrollObserver.observe(referencesSection);
-  }
+
   const portfolioItems = {
     web: [{
       title: "Hisar Temizlik Web Sitesi",
@@ -1674,48 +1602,105 @@
     });
   });
   displayPortfolioItems('all');
-  function toggleWhatsAppPopup() {
-    const popup = document.querySelector('.whatsapp-popup');
-    popup.classList.toggle('show');
-  }
-  function sendWhatsAppMessage() {
-    const input = document.querySelector('.whatsapp-input input');
-    const message = encodeURIComponent(input.value);
-    if (message) {
-      const whatsappNumber = '905550009261';
-      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
-      input.value = '';
-      toggleWhatsAppPopup();
+});
+function initMatrixTransition() {
+  const matrixChars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポ0123456789";
+  const transition = document.querySelector('.matrix-transition');
+  let columns;
+  function createCharacters() {
+    const width = window.innerWidth;
+    columns = Math.floor(width / 20);
+    transition.innerHTML = '';
+    for (let i = 0; i < columns; i++) {
+      const char = document.createElement('div');
+      char.className = 'matrix-character';
+      char.style.left = i * 20 + 'px';
+      char.style.animationDelay = Math.random() * 2 + 's';
+      char.textContent = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+      transition.appendChild(char);
     }
   }
-  function toggleLanguageOptions() {
-    const langOptions = document.querySelector('.lang-options');
-    langOptions.classList.toggle('show');
-    document.addEventListener('click', function closeLanguageOptions(e) {
-      const langSwitcher = document.querySelector('.language-switcher');
-      if (!langSwitcher.contains(e.target)) {
-        langOptions.classList.remove('show');
-        document.removeEventListener('click', closeLanguageOptions);
-      }
-    });
+  function updateCharacters() {
+    const chars = transition.children;
+    for (let char of chars) {
+      char.textContent = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+    }
   }
-  document.addEventListener('click', e => {
-    const popup = document.querySelector('.whatsapp-popup');
-    const button = document.querySelector('.whatsapp-button');
-    if (!popup.contains(e.target) && !button.contains(e.target) && popup.classList.contains('show')) {
-      popup.classList.remove('show');
+  return {
+    show: function () {
+      createCharacters();
+      transition.style.display = 'block';
+      const interval = setInterval(updateCharacters, 100);
+      return new Promise(resolve => {
+        setTimeout(() => {
+          clearInterval(interval);
+          transition.style.display = 'none';
+          resolve();
+        }, 1000);
+      });
+    }
+  };
+}
+function toggleMobileMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  menuToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+}
+
+document.querySelector('.menu-toggle').addEventListener('click', toggleMobileMenu);
+
+document.addEventListener('click', (e) => {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  if (!e.target.closest('.nav-links') && !e.target.closest('.menu-toggle')) {
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+  }
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+  });
+});
+
+function toggleLanguageOptions() {
+  const langOptions = document.querySelector('.lang-options');
+  langOptions.classList.toggle('show');
+  document.addEventListener('click', function closeLanguage(e) {
+    if (!e.target.closest('.language-switcher')) {
+      langOptions.classList.remove('show');
+      document.removeEventListener('click', closeLanguage);
     }
   });
-  const navLinks = document.querySelectorAll('.nav-links a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      startMatrixTransition();
-      setTimeout(() => {
-        window.location.href = link.href;
-      }, 1500);
-    });
-  });
+}
+function toggleWhatsAppPopup() {
+  const popup = document.querySelector('.whatsapp-popup');
+  popup.classList.toggle('show');
+}
+function sendWhatsAppMessage() {
+  const input = document.querySelector('.whatsapp-input input');
+  const message = encodeURIComponent(input.value);
+  if (message) {
+    const whatsappNumber = '905550009261';
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+    input.value = '';
+    toggleWhatsAppPopup();
+  }
+}
+document.addEventListener('click', e => {
+  const popup = document.querySelector('.whatsapp-popup');
+  const button = document.querySelector('.whatsapp-button');
+  if (!popup.contains(e.target) && !button.contains(e.target) && popup.classList.contains('show')) {
+    popup.classList.remove('show');
+  }
 });</script>
 </body>
 </html>

@@ -814,7 +814,6 @@
       transition: all 0.3s ease;
       opacity: 0;
       transform: translateY(20px);
-      transition: all 0.6s ease-out;
     }
 
     .portfolio-item.visible {
@@ -977,14 +976,6 @@
       margin: 4rem auto;
       padding: 2rem;
       text-align: center;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease-out;
-    }
-
-    .references.visible {
-      opacity: 1;
-      transform: translateY(0);
     }
 
     .references h2 {
@@ -1224,21 +1215,9 @@
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
-    
-    .matrix-transition.active {
-      display: block;
-      animation: matrixFadeOut 2s forwards;
-    }
-
-    @keyframes matrixFadeOut {
-      0% { opacity: 1; }
-      90% { opacity: 1; }
-      100% { opacity: 0; display: none; }
-    }
   </style>
 </head>
 <body>
-  <div class="matrix-transition"></div>
   <header class="header">
     <nav class="nav">
       <div class="logo">
@@ -1269,13 +1248,13 @@
             <span>EN</span>
           </div>
           <div class="lang-options">
-            <a href="portfolyo-TR.html" class="lang-option">
+            <a href=portfolyo-TR.html class="lang-option">
               <span>Türkçe</span>
             </a>
             <a href="portfolio.html" class="lang-option">
               <span>English</span>
             </a>
-            <a href="portfolio-AR" class="lang-option">
+            <a href="portfolio-AR.html" class="lang-option">
               <span>العربية</span>
             </a>
           </div>
@@ -1330,16 +1309,19 @@
     <h2>Our References</h2>
     <div class="references-grid">
       <div class="reference-item">
+        <img src="https://picsum.photos/200/200?random=1" alt="Hisar Temizlik">
         <h3>Hisar Temizlik</h3>
         <p>&quot;They did an amazing job!&quot;</p>
         <a href="https://www.hisartemizliktrabzon.com" class="reference-link" target="_blank">View Website</a>
       </div>
       <div class="reference-item">
+        <img src="https://picsum.photos/200/200?random=2" alt="Duygu Nail Art">
         <h3>Duygu Nail Art</h3>
         <p>&quot;Very professional team.&quot;</p>
         <a href="https://duygu.netlify.app" class="reference-link" target="_blank">View Website</a>
       </div>
       <div class="reference-item">
+        <img src="https://picsum.photos/200/200?random=3" alt="Airbagcim">
         <h3>Airbagcim</h3>
         <p>&quot;It turned out exactly as we wanted.&quot;</p>
         <a href="https://www.airbagcim.com" class="reference-link" target="_blank">View Website</a>
@@ -1365,8 +1347,10 @@
     </div>
   </footer>
   
+  <div class="matrix-transition"></div>
+
   <div class="whatsapp-box">
-    <div class="whatsapp-button" onclick="window.toggleWhatsAppPopup()">
+    <div class="whatsapp-button" onclick="toggleWhatsAppPopup()">
       <svg width="30" height="30" viewBox="0 0 24 24" fill="white">
         <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
       </svg>
@@ -1374,58 +1358,33 @@
     
     <div class="whatsapp-popup">
       <div class="whatsapp-header">
+        <img src="https://via.placeholder.com/40" alt="Profile">
         <div class="whatsapp-header-text">
           <h3>EnjoyTurk Support</h3>
           <p>Usually responds within 1 hour</p>
         </div>
       </div>
       <div class="whatsapp-message">
-        Hello! How can we help you?
+        Hi! How can we help you? 
       </div>
       <div class="whatsapp-input">
-        <input type="text" placeholder="Type your message...">
-        <button onclick="window.sendWhatsAppMessage()">Send</button>
+        <input type="text" placeholder="Type here...">
+        <button onclick="sendWhatsAppMessage()">Send</button>
       </div>
     </div>
   </div>
   
   <script>document.addEventListener('DOMContentLoaded', function () {
-  function startMatrixTransition() {
-    const transition = document.querySelector('.matrix-transition');
-    transition.classList.add('active');
-  
-    // Create matrix characters
-    for(let i = 0; i < 100; i++) {
-      const character = document.createElement('div');
-      character.className = 'matrix-character';
-      character.style.left = `${Math.random() * 100}%`;
-      character.style.animationDelay = `${Math.random() * 2}s`;
-      character.textContent = String.fromCharCode(0x30A0 + Math.random() * 96);
-      transition.appendChild(character);
-    }
-
-    // Clean up after transition
-    setTimeout(() => {
-      transition.classList.remove('active');
-      transition.innerHTML = ''; // Remove matrix characters
-    }, 2000);
-  }
-
-  window.toggleWhatsAppPopup = function () {
-    const popup = document.querySelector('.whatsapp-popup');
-    popup.classList.toggle('show');
-  };
-  window.sendWhatsAppMessage = function () {
-    const input = document.querySelector('.whatsapp-input input');
-    const message = encodeURIComponent(input.value);
-    if (message) {
-      const whatsappNumber = '905550009261';
-      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
-      input.value = '';
-      toggleWhatsAppPopup();
-    }
-  };
-  let currentSlide = 0;
+  const matrixTransition = initMatrixTransition();
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', async e => {
+      e.preventDefault();
+      const href = link.getAttribute('href');
+      await matrixTransition.show();
+      window.location.href = href;
+    });
+  });
+ let currentSlide = 0;
   const slides = document.querySelectorAll('.slide');
   const slideContainer = document.querySelector('.slider-container');
   function updateSlider() {
@@ -1443,6 +1402,7 @@
     currentSlide = (currentSlide + 1) % slides.length;
     updateSlider();
   }, 5000);
+  const references = document.querySelectorAll('.reference-item');
   const observerOptions = {
     threshold: 0.5,
     rootMargin: '0px'
@@ -1452,36 +1412,12 @@
       if (entry.isIntersecting) {
         entry.target.style.opacity = '1';
         entry.target.style.transform = 'translateX(0)';
-        const link = entry.target.querySelector('.reference-link');
-        if (link) {
-          link.style.transition = 'all 0.3s ease';
-        }
       }
     });
   }, observerOptions);
-  const scrollObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        scrollObserver.unobserve(entry.target);
-      }
-    });
-  }, observerOptions);
-  const references = document.querySelectorAll('.reference-item');
   references.forEach(reference => {
     referenceObserver.observe(reference);
   });
-  document.querySelectorAll('.portfolio-item').forEach(item => {
-    scrollObserver.observe(item);
-  });
-  const servicesSection = document.querySelector('.services-section');
-  if (servicesSection) {
-    scrollObserver.observe(servicesSection);
-  }
-  const referencesSection = document.querySelector('.references');
-  if (referencesSection) {
-    scrollObserver.observe(referencesSection);
-  }
   const portfolioItems = {
     web: [{
       title: "Hisar Temizlik Web Sitesi",
@@ -1650,48 +1586,105 @@
     });
   });
   displayPortfolioItems('all');
-  function toggleWhatsAppPopup() {
-    const popup = document.querySelector('.whatsapp-popup');
-    popup.classList.toggle('show');
-  }
-  function sendWhatsAppMessage() {
-    const input = document.querySelector('.whatsapp-input input');
-    const message = encodeURIComponent(input.value);
-    if (message) {
-      const whatsappNumber = '905550009261';
-      window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
-      input.value = '';
-      toggleWhatsAppPopup();
+});
+function initMatrixTransition() {
+  const matrixChars = "アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンガギグゲゴザジズゼゾダヂヅデドバビブベボパピプペポ0123456789";
+  const transition = document.querySelector('.matrix-transition');
+  let columns;
+  function createCharacters() {
+    const width = window.innerWidth;
+    columns = Math.floor(width / 20);
+    transition.innerHTML = '';
+    for (let i = 0; i < columns; i++) {
+      const char = document.createElement('div');
+      char.className = 'matrix-character';
+      char.style.left = i * 20 + 'px';
+      char.style.animationDelay = Math.random() * 2 + 's';
+      char.textContent = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+      transition.appendChild(char);
     }
   }
-  function toggleLanguageOptions() {
-    const langOptions = document.querySelector('.lang-options');
-    langOptions.classList.toggle('show');
-    document.addEventListener('click', function closeLanguageOptions(e) {
-      const langSwitcher = document.querySelector('.language-switcher');
-      if (!langSwitcher.contains(e.target)) {
-        langOptions.classList.remove('show');
-        document.removeEventListener('click', closeLanguageOptions);
-      }
-    });
+  function updateCharacters() {
+    const chars = transition.children;
+    for (let char of chars) {
+      char.textContent = matrixChars[Math.floor(Math.random() * matrixChars.length)];
+    }
   }
-  document.addEventListener('click', e => {
-    const popup = document.querySelector('.whatsapp-popup');
-    const button = document.querySelector('.whatsapp-button');
-    if (!popup.contains(e.target) && !button.contains(e.target) && popup.classList.contains('show')) {
-      popup.classList.remove('show');
+  return {
+    show: function () {
+      createCharacters();
+      transition.style.display = 'block';
+      const interval = setInterval(updateCharacters, 100);
+      return new Promise(resolve => {
+        setTimeout(() => {
+          clearInterval(interval);
+          transition.style.display = 'none';
+          resolve();
+        }, 1000);
+      });
+    }
+  };
+}
+function toggleMobileMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  menuToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+}
+
+document.querySelector('.menu-toggle').addEventListener('click', toggleMobileMenu);
+
+document.addEventListener('click', (e) => {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  if (!e.target.closest('.nav-links') && !e.target.closest('.menu-toggle')) {
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+  }
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+  });
+});
+
+function toggleLanguageOptions() {
+  const langOptions = document.querySelector('.lang-options');
+  langOptions.classList.toggle('show');
+  document.addEventListener('click', function closeLanguage(e) {
+    if (!e.target.closest('.language-switcher')) {
+      langOptions.classList.remove('show');
+      document.removeEventListener('click', closeLanguage);
     }
   });
-  const navLinks = document.querySelectorAll('.nav-links a');
-  navLinks.forEach(link => {
-    link.addEventListener('click', e => {
-      e.preventDefault();
-      startMatrixTransition();
-      setTimeout(() => {
-        window.location.href = link.href;
-      }, 1500);
-    });
-  });
+}
+function toggleWhatsAppPopup() {
+  const popup = document.querySelector('.whatsapp-popup');
+  popup.classList.toggle('show');
+}
+function sendWhatsAppMessage() {
+  const input = document.querySelector('.whatsapp-input input');
+  const message = encodeURIComponent(input.value);
+  if (message) {
+    const whatsappNumber = '905550009261';
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+    input.value = '';
+    toggleWhatsAppPopup();
+  }
+}
+document.addEventListener('click', e => {
+  const popup = document.querySelector('.whatsapp-popup');
+  const button = document.querySelector('.whatsapp-button');
+  if (!popup.contains(e.target) && !button.contains(e.target) && popup.classList.contains('show')) {
+    popup.classList.remove('show');
+  }
 });</script>
 </body>
 </html>

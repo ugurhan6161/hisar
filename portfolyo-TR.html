@@ -1248,13 +1248,13 @@
             <span>TR</span>
           </div>
           <div class="lang-options">
-            <a href="hizmetler.html" class="lang-option">
+            <a href=portfolyo.html" class="lang-option">
               <span>Türkçe</span>
             </a>
-            <a href="services.html" class="lang-option">
+            <a href="portfolio.html" class="lang-option">
               <span>English</span>
             </a>
-            <a href="services-AR" class="lang-option">
+            <a href="portfolio-AR.html" class="lang-option">
               <span>العربية</span>
             </a>
           </div>
@@ -1262,6 +1262,7 @@
       </div>
     </nav>
   </header>
+
   <h1 class="portfolio-header">PORTFOLYO</h1>
 
   <div class="portfolio-slider">
@@ -1632,6 +1633,46 @@ function initMatrixTransition() {
       });
     }
   };
+}
+function toggleMobileMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  menuToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+}
+
+document.querySelector('.menu-toggle').addEventListener('click', toggleMobileMenu);
+
+document.addEventListener('click', (e) => {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  if (!e.target.closest('.nav-links') && !e.target.closest('.menu-toggle')) {
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+  }
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+  });
+});
+
+function toggleLanguageOptions() {
+  const langOptions = document.querySelector('.lang-options');
+  langOptions.classList.toggle('show');
+  document.addEventListener('click', function closeLanguage(e) {
+    if (!e.target.closest('.language-switcher')) {
+      langOptions.classList.remove('show');
+      document.removeEventListener('click', closeLanguage);
+    }
+  });
 }
 function toggleWhatsAppPopup() {
   const popup = document.querySelector('.whatsapp-popup');

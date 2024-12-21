@@ -26,7 +26,6 @@
       background-attachment: fixed;
       background-size: cover;
       color: var(--light);
-      direction: rtl;
     }
 
     .header {
@@ -61,7 +60,6 @@
       display: flex;
       gap: 2rem;
       align-items: center;
-      direction: rtl;
     }
 
     .nav-links a {
@@ -875,7 +873,6 @@
       margin: 1rem 0;
       border: 1px solid rgba(0,242,195,0.2);
       border-radius: 8px;
-      direction: rtl;
     }
 
     .chat-input {
@@ -1070,7 +1067,7 @@
               <path d="M2 12h20"/>
               <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
             </svg>
-            <span>عربي</span>
+            <span>AR</span>
           </div>
           <div class="lang-options">
             <a href="iletisim.html" class="lang-option">
@@ -1103,17 +1100,7 @@
           طرابزون، تركيا
         </div>
       </div>
-      
-      <div class="contact-detail">
-        <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/>
-        </svg>
-        <div>
-          <strong>الهاتف:</strong><br>
-          +90 (462) XXX XX XX
-        </div>
-      </div>
-      
+     
       <div class="contact-detail">
         <svg class="contact-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -1277,6 +1264,47 @@ function showCallTransition() {
   const callTransition = document.querySelector('.call-transition');
   callTransition.classList.add('active');
 }
+function toggleMobileMenu() {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  menuToggle.classList.toggle('active');
+  navLinks.classList.toggle('active');
+}
+
+document.querySelector('.menu-toggle').addEventListener('click', toggleMobileMenu);
+
+document.addEventListener('click', (e) => {
+  const menuToggle = document.querySelector('.menu-toggle');
+  const navLinks = document.querySelector('.nav-links');
+  
+  if (!e.target.closest('.nav-links') && !e.target.closest('.menu-toggle')) {
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+  }
+});
+
+document.querySelectorAll('.nav-links a').forEach(link => {
+  link.addEventListener('click', () => {
+    const menuToggle = document.querySelector('.menu-toggle');
+    const navLinks = document.querySelector('.nav-links');
+    
+    menuToggle.classList.remove('active');
+    navLinks.classList.remove('active');
+  });
+});
+
+function toggleLanguageOptions() {
+  const langOptions = document.querySelector('.lang-options');
+  langOptions.classList.toggle('show');
+  document.addEventListener('click', function closeLanguage(e) {
+    if (!e.target.closest('.language-switcher')) {
+      langOptions.classList.remove('show');
+      document.removeEventListener('click', closeLanguage);
+    }
+  });
+}
+
   function sendWhatsAppMessage() {
     const input = document.querySelector('.whatsapp-input input');
     const message = encodeURIComponent(input.value);
